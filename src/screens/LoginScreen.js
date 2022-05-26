@@ -1,41 +1,46 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
 import { GlobalStyles } from '../constants/styles'
 import { Input } from "@rneui/themed"
 import { Button } from "@rneui/base";
-//import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../reducers/authentication';
 
-const LoginScreen = () => {
-    
-    const [inputs, setInputs] = useState({
-        username: '',
-        password: ''
-    })
-
-    // const [username, setUsername] = useState('')
-    // const [password, setPasword] = useState('')
+const LoginScreen = ({ navigation }) => {
+    const dispatch = useDispatch()
+    const isLoading = useSelector(state => state.authentication.isLoading)
+    const [inputs, setInputs] = useState({ username: 'mor_2314', password: '83r5^_' })
     const { username, password } = inputs
-    //const dispatch = useDispatch()
+
 
     const handleLogin = () => {
-        
+        console.log('login')
+        dispatch(login({ username, password }))
+            .unwrap()
+            .then((result) => {
+                navigation.navigate('Home')
+                console.log('result', result)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     const handleUserName = (newText) => {
-        setInputs({username: newText})
+        setInputs({ ...inputs, username: newText })
     }
 
     const handlePassword = (newText) => {
-        setInputs({password: newText})
+        setInputs({ ...inputs, password: newText })
     }
 
     return <View>
-        <Text>Login Screen</Text>
-
-        {/* <Input placeholder='Login' name='username' value={username} onChangeText={(newText) => { setUsername(newText) }} /> */}
-        <Input placeholder='Login' name='username' value={username} onChangeText={(newText) => handleUserName(newText)} />
-        <Input placeholder='Password' name='password' value={password} onChangeText={(newText) => handlePassword(newText)} />
-        <Button title='Login' onPress={handleLogin} />
+        {isLoading ? <ActivityIndicator /> : <>
+            <Text>Login Screen</Text>
+            <Input placeholder='Login' name='username' value={username} onChangeText={(newText) => handleUserName(newText)} />
+            <Input placeholder='Password' name='password' value={password} onChangeText={(newText) => handlePassword(newText)} />
+            <Button title='Login' onPress={handleLogin} />
+        </>}
     </View>
 }
 
