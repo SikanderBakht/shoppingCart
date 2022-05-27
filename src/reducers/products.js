@@ -4,13 +4,14 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 export const getCategories = createAsyncThunk(
     'categories',
     async () => {
-        const response = await fetch('https://fakestoreapi.com/products/category/jewelery')
+        const response = await fetch('https://fakestoreapi.com/products/categories')
         const formattedResponse = await response.json()
         return formattedResponse
     }
 )
 
-const categories = createSlice({
+
+const categoriesSlice = createSlice({
     name: 'categories',
     initialState: {
         isLoading: false,
@@ -32,4 +33,4 @@ const categories = createSlice({
     }
 })
 
-export default categories.reducer
+export default categoriesSlice.reducer

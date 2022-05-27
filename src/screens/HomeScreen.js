@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import ProductHorizontalList from '../components/ProductsHorizontalList'
 import { getCategories } from '../reducers/products'
+import ProductHorizontalList from '../components/ProductsHorizontalList';
 
 const HomeScreen = () => {
     const dispatch = useDispatch()
-
+    const productCategories = useSelector(state => state.products.categories)
+    const isLoading = useSelector(state => state.products.isLoading)
+    
     useEffect(() => {
         dispatch(getCategories())
             .unwrap()
@@ -16,11 +18,18 @@ const HomeScreen = () => {
             .catch((err) => {
                 console.log(err)
             })
-    }, []);
+    }, [])
 
     return <View style={styles.container}>
-        <Text>Home Screen</Text>
-        <ProductHorizontalList/>
+        <Text>Home Scrseen</Text>
+        {isLoading ?
+            <ActivityIndicator />
+            : productCategories.map((category) => {
+                return <ProductHorizontalList key={category} category={category}/>
+            })
+        }
+
+
     </View>
 }
 
