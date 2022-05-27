@@ -36,7 +36,7 @@ const LoginScreen = ({ navigation }) => {
 
     return <View>
         {isLoading ? <ActivityIndicator /> : <>
-            <Text>Login Screen</Text>
+            <Text>Login Scsreen</Text>
             <Input placeholder='Login' name='username' value={username} onChangeText={(newText) => handleUserName(newText)} />
             <Input placeholder='Password' name='password' value={password} onChangeText={(newText) => handlePassword(newText)} />
             <Button title='Login' onPress={handleLogin} />
