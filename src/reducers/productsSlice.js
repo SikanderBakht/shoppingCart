@@ -1,10 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 
-export const getProductByCategory  = createAsyncThunk(
+export const getProductByCategory = createAsyncThunk(
     'products',
-    async () => {
-        const response = await fetch('https://fakestoreapi.com/products/category/jewelery')
+    async (params) => {
+        console.log("product category params", params);
+        const url = `https://fakestoreapi.com/products/category/${params}`
+        const response = await fetch(url)
+        console.log(url)
         const formattedResponse = await response.json()
         return formattedResponse
     }

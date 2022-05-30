@@ -7,13 +7,13 @@ import ProductHorizontalList from '../components/ProductsHorizontalList';
 const HomeScreen = () => {
     const dispatch = useDispatch()
     const productCategories = useSelector(state => state.categories.categories)
-    const isLoading = useSelector(state => state.products.isLoading)
+    const isLoading = useSelector(state => state.categories.isLoading)
 
     useEffect(() => {
         dispatch(getCategories())
             .unwrap()
             .then((result) => {
-                console.log('result', result)
+                //console.log('result', result)
             })
             .catch((err) => {
                 console.log(err)
@@ -24,11 +24,17 @@ const HomeScreen = () => {
         <Text>Home Scrseen</Text>
         {isLoading ?
             <ActivityIndicator />
-            : <ProductHorizontalList/>
+            : <>
+                <ProductHorizontalList key='1' category='jewelery' />
+                <ProductHorizontalList key='2' category='electronics' />
+            </> 
+            
             
             // productCategories.map((category) => {
-            //     return <ProductHorizontalList key={category} category={category}/>
+            //     return <ProductHorizontalList key={category} category={category} />
             // })
+            
+            
         }
 
 

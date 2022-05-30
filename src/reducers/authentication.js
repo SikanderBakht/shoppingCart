@@ -4,8 +4,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 export const login = createAsyncThunk(
     'login',
     async (params) => {
-        console.log(params);
-
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
