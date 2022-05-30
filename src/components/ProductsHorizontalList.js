@@ -1,48 +1,47 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native'
-import { getProductByCategory } from '../reducers/productsSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { Button } from "@rneui/base"
 import ProductItem from '../components/ProductItem'
 
 const ProductHorizontalList = ({ category }) => {
-    const dispatch = useDispatch()
-    const products = useSelector(state => state.products.products)
-    const isLoading = useSelector(state => state.products.isLoading)
+    const [isLoading, setLoading] = useState(true)
+    const [products, setProducts] = useState([])
 
-    useEffect(() => {
-        dispatch(getProductByCategory(category))
-            .unwrap()
-            .then((result) => {
-                //console.log('result', result)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
 
-    const handleLogin = () => {
-        dispatch(getProductByCategory())
-            .unwrap()
-            .then((result) => {
-                //console.log('result', result)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+    const getProductByCategory = async () => {
+        setLoading(true)
+        try {
+            const response = await fetch(`https://fakestoreapi.com/products/category/${category}`);
+            const json = await response.json();
+            console.log(json);
+            setProducts(json);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
     }
 
+    useEffect(() => {
+        getProductByCategory()
+    }, [])
+
     return <View style={styles.container}>
-        {/* <Text>{category}</Text> */}
         {isLoading ?
             <ActivityIndicator />
             : <>
                 <Text> Title: {category}</Text>
-                <ProductItem productList={products}/>
+                <FlatList
+                    horizontal
+                    keyExtractor={(item) => item.id}
+                    data={products}
+                    renderItem={(item) => {
+                        return <ProductItem product={item} />
+                    }}
+                />
+
             </>
 
         }
-        <Button title='Login' onPress={handleLogin} />
     </View>
 }
 
