@@ -26,14 +26,14 @@ const HomeScreen = () => {
     }, [])
 
     return <View style={styles.container}>
-        <Text>Home Scrseen</Text>
-        {isLoading ?
-            <ActivityIndicator />
-            : <>
-                {categories.map((category) => {
-                    return <ProductHorizontalList key={category} category={category} />
-                })}
-            </>
+        {
+            isLoading ?
+                <ActivityIndicator />
+                : <>
+                    {categories.map((category) => {
+                        return <ProductHorizontalList key={category} category={category} />
+                    })}
+                </>
         }
 
 

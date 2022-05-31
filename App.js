@@ -9,6 +9,9 @@ import { store } from './src/redux/store'
 import HomeScreen from './src/screens/HomeScreen'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { GlobalStyles } from './src/constants/styles';
+import ProductDetailScreen from './src/screens/ProductDetailScreen';
+import ProductListScreen from './src/screens/ProductListScreen';
+import CartScreen from './src/screens/CartScreen';
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -32,12 +35,12 @@ const BottomTabBar = () => {
         }}
       />
       <Tab.Screen
-        name="Feed1"
-        component={HomeScreen}
+        name="Cart"
+        component={CartScreen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Cart',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <MaterialCommunityIcons name="cart" color={color} size={size} />
           ),
         }}
       />
@@ -54,6 +57,8 @@ export default function App() {
           <Stack.Screen name='Splash' component={SplashScreen} options={{ headerShown: false }} />
           <Stack.Screen name='Login' component={LoginScreen} />
           <Stack.Screen name='Home' component={BottomTabBar} options={{ headerShown: false }} />
+          <Stack.Screen name='ProductDetail' component={ProductDetailScreen} />
+          <Stack.Screen name='ProductList' component={ProductListScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

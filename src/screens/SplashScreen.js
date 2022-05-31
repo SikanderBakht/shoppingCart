@@ -1,18 +1,24 @@
 import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import { View, Text, StyleSheet, StatusBar } from 'react-native'
 import { GlobalStyles } from '../constants/styles'
 
-const SplashScreen = ({navigation}) => {
+const SplashScreen = ({ navigation }) => {
     navigateToLogin(navigation)
     return <View style={styles.container}>
-        <Text>Splah Screen</Text>
+        <StatusBar
+            animated={true}
+            backgroundColor="#61dafb"
+            barStyle={statusBarStyle}
+            showHideTransition={statusBarTransition}
+            hidden={hidden} />
+        <Text style={styles.text}>Shopping Cart</Text>
     </View>
 }
 
 //# region functions
 const navigateToLogin = (navigation) => {
     setTimeout(() => {
-        navigation.navigate('Login')
+        //navigation.navigate('Login')
     })
 }
 //# endregion
@@ -20,7 +26,15 @@ const navigateToLogin = (navigation) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: GlobalStyles.colors.primary
+    },
+    text: {
+        fontSize: 36,
+        color: 'white',
+        fontStyle: 'italic',
+        fontWeight: 'bold'
     }
 })
 
