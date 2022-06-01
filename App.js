@@ -12,6 +12,7 @@ import { GlobalStyles } from './src/constants/styles';
 import ProductDetailScreen from './src/screens/ProductDetailScreen';
 import ProductListScreen from './src/screens/ProductListScreen';
 import CartScreen from './src/screens/CartScreen';
+import { Button, Image } from '@rneui/base'
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -44,7 +45,7 @@ const BottomTabBar = () => {
           ),
         }}
       />
-      
+
     </Tab.Navigator>
   )
 }
@@ -53,10 +54,28 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName='Splash' screenOptions={{
+          headerStyle: {
+            backgroundColor: GlobalStyles.colors.backgroundColor
+          },
+          contentStyle: {
+            backgroundColor: GlobalStyles.colors.backgroundColor
+          }
+
+        }}>
           <Stack.Screen name='Splash' component={SplashScreen} options={{ headerShown: false }} />
-          <Stack.Screen name='Login' component={LoginScreen} />
-          <Stack.Screen name='Home' component={BottomTabBar} options={{ headerShown: false }} />
+          <Stack.Screen name='Login' component={LoginScreen} options={{
+            title: '',
+            headerShadowVisible: false,
+            headerLeft: () => (
+
+              <Image
+                source={{ uri: require('./src/assets/images/back.png')}}
+                style={{ width: 20, height: 20 }} />
+
+            )
+          }} />
+          <Stack.Screen name='Home' component={BottomTabBar} />
           <Stack.Screen name='ProductDetail' component={ProductDetailScreen} />
           <Stack.Screen name='ProductList' component={ProductListScreen} />
         </Stack.Navigator>

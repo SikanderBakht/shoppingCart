@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator, StatusBar } from 'react-native'
 import { GlobalStyles } from '../constants/styles'
 import { Input } from "@rneui/themed"
 import { Button } from "@rneui/base";
@@ -35,6 +35,11 @@ const LoginScreen = ({ navigation }) => {
     }
 
     return <View>
+        <StatusBar
+            animated={true}
+            barStyle='dark-content'
+            backgroundColor={GlobalStyles.colors.backgroundColor}
+            showHideTransition='fade' />
         {isLoading ? <ActivityIndicator /> : <>
             <Text>Login Scsreen</Text>
             <Input placeholder='Login' name='username' value={username} onChangeText={(newText) => handleUserName(newText)} />

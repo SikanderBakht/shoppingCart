@@ -7,10 +7,8 @@ const SplashScreen = ({ navigation }) => {
     return <View style={styles.container}>
         <StatusBar
             animated={true}
-            backgroundColor="#61dafb"
-            barStyle={statusBarStyle}
-            showHideTransition={statusBarTransition}
-            hidden={hidden} />
+            backgroundColor={GlobalStyles.colors.primary}
+            showHideTransition='fade' />
         <Text style={styles.text}>Shopping Cart</Text>
     </View>
 }
@@ -18,7 +16,7 @@ const SplashScreen = ({ navigation }) => {
 //# region functions
 const navigateToLogin = (navigation) => {
     setTimeout(() => {
-        //navigation.navigate('Login')
+        navigation.replace('Login')
     })
 }
 //# endregion
