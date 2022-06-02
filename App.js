@@ -12,7 +12,7 @@ import { GlobalStyles } from './src/constants/styles';
 import ProductDetailScreen from './src/screens/ProductDetailScreen';
 import ProductListScreen from './src/screens/ProductListScreen';
 import CartScreen from './src/screens/CartScreen';
-import { Button, Image } from '@rneui/base'
+import { Image, Pressable, StyleSheet, BackHandler } from 'react-native';
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -51,6 +51,10 @@ const BottomTabBar = () => {
 }
 
 export default function App() {
+  const backButtonClick = () => {
+    BackHandler.exitApp()
+  }
+
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -68,10 +72,11 @@ export default function App() {
             title: '',
             headerShadowVisible: false,
             headerLeft: () => (
-
-              <Image
-                source={{ uri: require('./src/assets/images/back.png')}}
-                style={{ width: 20, height: 20 }} />
+              <Pressable onPress={backButtonClick} style={({ pressed }) => pressed && styles.pressed}>
+                <Image
+                  source={require('./src/assets/images/back.png')}
+                  style={{ width: 10, resizeMode: 'contain' }} />
+              </Pressable>
 
             )
           }} />
@@ -83,3 +88,9 @@ export default function App() {
     </Provider>
   )
 }
+
+const styles = StyleSheet.create({
+  pressed: {
+      opacity: 0.75
+  },
+})

@@ -41,7 +41,10 @@ const styles = StyleSheet.create({
         width: 148,
         height: 184,
         marginHorizontal: 5
-    }
+    },
+    pressed: {
+        opacity: 0.75
+    },
 })
 
 export default ProductItem

@@ -34,18 +34,19 @@ const LoginScreen = ({ navigation }) => {
         setInputs({ ...inputs, password: newText })
     }
 
-    return <View>
+    return <View style={styles.container}>
         <StatusBar
             animated={true}
             barStyle='dark-content'
             backgroundColor={GlobalStyles.colors.backgroundColor}
             showHideTransition='fade' />
-        {isLoading ? <ActivityIndicator /> : <>
-            <Text>Login Scsreen</Text>
+
+        {isLoading ? <ActivityIndicator /> : <View >
+            <Text style={styles.title}>Login</Text>
             <Input placeholder='Login' name='username' value={username} onChangeText={(newText) => handleUserName(newText)} />
             <Input placeholder='Password' name='password' value={password} onChangeText={(newText) => handlePassword(newText)} />
             <Button title='Login' onPress={handleLogin} />
-        </>}
+        </View>}
     </View>
 }
 
@@ -55,7 +56,13 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: GlobalStyles.colors.primary
+        marginHorizontal: 14,
+        backgroundColor: GlobalStyles.colors.backgroundColor
+    },
+    title: {
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 34,
     }
 })
 
