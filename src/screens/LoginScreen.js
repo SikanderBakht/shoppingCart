@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, ActivityIndicator, StatusBar } from 'react-native'
 import { GlobalStyles } from '../constants/styles'
-import { Input } from "@rneui/themed"
-import { Button } from "@rneui/base";
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../reducers/authentication';
+import { TextInput, Button } from 'react-native-paper'
 
 const LoginScreen = ({ navigation }) => {
     const dispatch = useDispatch()
@@ -43,9 +42,36 @@ const LoginScreen = ({ navigation }) => {
 
         {isLoading ? <ActivityIndicator /> : <View >
             <Text style={styles.title}>Login</Text>
-            <Input placeholder='Login' name='username' value={username} onChangeText={(newText) => handleUserName(newText)} />
-            <Input placeholder='Password' name='password' value={password} onChangeText={(newText) => handlePassword(newText)} />
-            <Button title='Login' onPress={handleLogin} />
+            <TextInput
+                label='Email'
+                name='username'
+                value={username}
+                onChangeText={(newText) => handleUserName(newText)}
+                underlineColor='transparent'
+                theme={{
+                    colors: {
+                        placeholder: GlobalStyles.colors.textColorSecondary, text: GlobalStyles.colors.textColorPrimary, primary: GlobalStyles.colors.textColorSecondary,
+                        underlineColor: 'red', background: 'white'
+                    }
+                }}
+                style={{ marginVertical: 10 }} />
+
+            <TextInput
+                label='Password'
+                name='password'
+                value={password}
+                onChangeText={(newText) => handlePassword(newText)}
+                underlineColor='transparent'
+                theme={{
+                    colors: {
+                        placeholder: GlobalStyles.colors.textColorSecondary, text: GlobalStyles.colors.textColorPrimary, primary: GlobalStyles.colors.textColorSecondary,
+                        underlineColor: 'red', background: 'white'
+                    }
+                }}
+                style={{ marginVertical: 10 }} />
+            {/* <Input placeholder='Login' name='username' value={username} onChangeText={(newText) => handleUserName(newText)} /> */}
+            {/* <Input placeholder='Password' name='password' value={password} onChangeText={(newText) => handlePassword(newText)} /> */}
+            <Button onPress={handleLogin} mode="contained" color={GlobalStyles.colors.primary} contentStyle ={styles.buttonContent} style={styles.button}>Login</Button>
         </View>}
     </View>
 }
@@ -63,6 +89,13 @@ const styles = StyleSheet.create({
         color: 'black',
         fontWeight: 'bold',
         fontSize: 34,
+    },
+    buttonContent: {
+        height: 48
+    },
+    button: {
+        borderRadius: 25,
+        height: 48
     }
 })
 
