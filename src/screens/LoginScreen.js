@@ -69,9 +69,17 @@ const LoginScreen = ({ navigation }) => {
                     }
                 }}
                 style={{ marginVertical: 10 }} />
-            {/* <Input placeholder='Login' name='username' value={username} onChangeText={(newText) => handleUserName(newText)} /> */}
-            {/* <Input placeholder='Password' name='password' value={password} onChangeText={(newText) => handlePassword(newText)} /> */}
-            <Button onPress={handleLogin} mode="contained" color={GlobalStyles.colors.primary} contentStyle ={styles.buttonContent} style={styles.button}>Login</Button>
+
+            <Button
+                onPress={handleLogin}
+                mode="clear"
+                color={GlobalStyles.colors.primary}
+                icon={require('../assets/images/ic_red_right_arrow.png')}
+                style={{ alignItems: 'flex-end' }}
+                contentStyle={{ flexDirection: 'row-reverse' }}>
+                <Text style={{ color: GlobalStyles.colors.textColorPrimary }}>Forgot your password?</Text>
+            </Button>
+            <Button onPress={handleLogin} mode="contained" color={GlobalStyles.colors.primary} contentStyle={styles.buttonContent} style={styles.button}>Login</Button>
         </View>}
     </View>
 }

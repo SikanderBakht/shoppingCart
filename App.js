@@ -74,7 +74,7 @@ export default function App() {
             headerLeft: () => (
               <Pressable onPress={backButtonClick} style={({ pressed }) => pressed && styles.pressed}>
                 <Image
-                  source={require('./src/assets/images/back.png')}
+                  source={require('./src/assets/images/ic_back.png')}
                   style={{ width: 10, resizeMode: 'contain' }} />
               </Pressable>
 
